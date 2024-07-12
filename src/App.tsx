@@ -1,34 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from "react";
+import axios from "axios";
+import ReactMarkdown from "react-markdown";
+import Form from "./Form";
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [responseMessage, setResponseMessage] = useState<string>("");
+  const [inputText, setInputText] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const sendMessage = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${import.meta.env.VITE_GEMINI_API}`,
+
+        {
+          contents:[
+            {
+              parts:[
+                {
+                  text: inputText
+                }
+              ]
+            }
+          ]
+        },
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      
+      const responseContent = response.data.candidates[0].content;
+      const responseParts = responseContent.parts.map((part: { text: string }) => part.text).join("\n");
+      setResponseMessage(responseParts);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(`Gemini API has error occured: ${error}`);
+    }
+  };
 
   return (
-    <>
+    <div>
+      <h1>Gemini Chat Bot</h1>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        { isLoading ? <p className="loading">現在、問い合わせ中です...</p> : null}
+        <ReactMarkdown>{responseMessage}</ReactMarkdown>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div>
+        <Form inputText={inputText} setInputText={setInputText} sendMessage={sendMessage}/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
