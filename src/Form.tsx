@@ -5,6 +5,10 @@ type FormProps = {
 }
 
 const Form = (props: FormProps) => {
+
+  // Chromeで音声リストを事前に取得
+  window.speechSynthesis.getVoices();
+  
   // 再生
   const ReadPlay = () => {
     // let readElem = document.querySelector<HTMLElement>('#root p')!;
@@ -12,13 +16,43 @@ const Form = (props: FormProps) => {
     // let uttr = new SpeechSynthesisUtterance(readElemText);
     // window.speechSynthesis.speak(uttr);
 
-    let readElem = document.querySelectorAll<HTMLElement>('#root p')!;
+    let readElem = null;
     let readElemText: string = '';
-    readElem.forEach(function(elem) {
-      readElemText += elem.textContent as string;
-    })
+    let answerElem = document.getElementById('answer')!;
+
+    if (answerElem.hasChildNodes()) {// 子要素があれば
+      readElem = document.querySelectorAll<HTMLElement>('#answer p, #answer li')!;
+      readElem.forEach(function(elem) {
+        readElemText += elem.textContent as string;
+      })
+    } else { // 子要素が無ければ
+      readElem = document.getElementById('greet__text')!;
+      readElemText += readElem.textContent as string;
+    }
+
+    // let uttr = new SpeechSynthesisUtterance(readElemText);
+
+
+    window.speechSynthesis.getVoices()[3];
     let uttr = new SpeechSynthesisUtterance(readElemText);
+    let voice = window.speechSynthesis.getVoices()[3];
+    uttr.voice = voice;
+    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(uttr);
+
+    // window.speechSynthesis.onvoiceschanged = () => {
+    //   alert('テスト')
+    //   let uttr = new SpeechSynthesisUtterance(readElemText);
+    //   let voice = window.speechSynthesis.getVoices()[3];
+    //   uttr.voice = voice;
+    //   window.speechSynthesis.cancel();
+    //   window.speechSynthesis.speak(uttr);
+    // };
+
+    // let voice = window.speechSynthesis.getVoices()[2];
+    // uttr.voice = voice;
+    // window.speechSynthesis.cancel();
+    // window.speechSynthesis.speak(uttr);
   }
   // 停止
   const ReadStop = () => {
@@ -30,16 +64,29 @@ const Form = (props: FormProps) => {
   }
 
   return (
-    <form >
+    <form className="form">
+      <div className="form__btn-wrap">
+        <div id="play-btn" onClick={ReadPlay} className="form__btn">
+          <img className="form__btn-img" src="/src/assets/icon_play_pc.png" alt="" width="54" height="56"/>
+        </div>
+        <div id="stop-btn" onClick={ReadStop} className="form__btn">
+          <img className="form__btn-img" src="/src/assets/icon_stop_pc.png" alt="" width="54" height="56"/>
+        </div>
+        <div id="restart-btn" onClick={ReadRestart} className="form__btn">
+          <img className="form__btn-img" src="/src/assets/icon_restart_pc.png" alt="" width="54" height="56"/>
+        </div>
+      </div>
       <input
+        className="form__input-text"
         type="input"
         value={props.inputText}
+        placeholder="お話ししたい事を入力してください"
         onChange={(e) => props.setInputText(e.target.value)}
       />
-      <button onClick={props.sendMessage}>送信</button>
-      <div id="play-btn" onClick={ReadPlay}>再生</div>
-      <div id="stop-btn" onClick={ReadStop}>停止</div>
-      <div id="restart-btn" onClick={ReadRestart}>再開</div>
+      <button className="form__submit" onClick={props.sendMessage}>
+        <img className="form__btn-img" src="/src/assets/icon_send_pc.png" alt="" width="30" height="30"/>
+      </button>
+
     </form>
   )
 }
