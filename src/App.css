@@ -223,6 +223,10 @@ body, #root {
   margin-left: 12px;
 }
 
+.form__btn:hover {
+  cursor: pointer;
+}
+
 .form__btn-img {
   width: 100%;
 }
@@ -232,6 +236,10 @@ body, #root {
   position: absolute;
   top: 55px;
   right: 14px;
+}
+
+.form__submit:hover {
+  cursor: pointer;
 }
 
 /*** 回答 ***/

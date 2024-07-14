@@ -1,3 +1,8 @@
+import iconPlayPcImg from "./assets/icon_play_pc.png";
+import iconStopPcImg from "./assets/icon_stop_pc.png";
+import iconRestartPcImg from "./assets/icon_restart_pc.png";
+import iconSendPcImg from "./assets/icon_send_pc.png";
+
 type FormProps = {
   inputText: string
   setInputText: React.Dispatch<React.SetStateAction<string>>
@@ -8,7 +13,7 @@ const Form = (props: FormProps) => {
 
   // Chromeで音声リストを事前に取得
   window.speechSynthesis.getVoices();
-  
+
   // 再生
   const ReadPlay = () => {
     // let readElem = document.querySelector<HTMLElement>('#root p')!;
@@ -67,13 +72,14 @@ const Form = (props: FormProps) => {
     <form className="form">
       <div className="form__btn-wrap">
         <div id="play-btn" onClick={ReadPlay} className="form__btn">
-          <img className="form__btn-img" src="/src/assets/icon_play_pc.png" alt="" width="54" height="56"/>
+          <img className="form__btn-img" src={iconPlayPcImg} alt="" width="54" height="56"/>
+
         </div>
         <div id="stop-btn" onClick={ReadStop} className="form__btn">
-          <img className="form__btn-img" src="/src/assets/icon_stop_pc.png" alt="" width="54" height="56"/>
+          <img className="form__btn-img" src={iconStopPcImg} alt="" width="54" height="56"/>
         </div>
         <div id="restart-btn" onClick={ReadRestart} className="form__btn">
-          <img className="form__btn-img" src="/src/assets/icon_restart_pc.png" alt="" width="54" height="56"/>
+          <img className="form__btn-img" src={iconRestartPcImg} alt="" width="54" height="56"/>
         </div>
       </div>
       <input
@@ -84,7 +90,7 @@ const Form = (props: FormProps) => {
         onChange={(e) => props.setInputText(e.target.value)}
       />
       <button className="form__submit" onClick={props.sendMessage}>
-        <img className="form__btn-img" src="/src/assets/icon_send_pc.png" alt="" width="30" height="30"/>
+        <img className="form__btn-img" src={iconSendPcImg} alt="" width="30" height="30"/>
       </button>
 
     </form>

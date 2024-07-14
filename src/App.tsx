@@ -1,7 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import logoImg from "./assets/logo.png";
+import iconPlayPcImg from "./assets/icon_play_pc.png";
+import iconStopPcImg from "./assets/icon_stop_pc.png";
+import iconRestartPcImg from "./assets/icon_restart_pc.png";
 import Form from "./Form";
+
+
+
 import './App.css'
 
 function App() {
@@ -54,7 +61,7 @@ function App() {
 
       <main className="main">
         <header className="header">
-          <h1 className="site-title"><img className="site-title__img" src="/src/assets/logo.png" alt="Gemini Chat App" width="514" height="55" /></h1>
+          <h1 className="site-title"><img className="site-title__img" src={logoImg} alt="Gemini Chat App" width="514" height="55" /></h1>
         </header>
         <div id="contents" className="contents">
           <div id="greet" className="greet">
@@ -63,15 +70,16 @@ function App() {
           <div id="guidance" className="guidance">
             <ul className="guidance__list-wrap">
               <li className="guidance__list">
-                <img className="guidance__list-img" src="/src/assets/icon_play_pc.png" alt="" width="54" height="56"/>
+                <img className="guidance__list-img" src={iconPlayPcImg} alt="" width="54" height="56"/>
                 <span className="guidance__list-text">ボタンで音声を再生します。</span>
               </li>
               <li className="guidance__list">
-                <img className="guidance__list-img" src="/src/assets/icon_stop_pc.png" alt="" width="54" height="56"/>
+                <img className="guidance__list-img" src={iconStopPcImg} alt="" width="54" height="56"/>
                 <span className="guidance__list-text">ボタンで音声を停止します。</span>
               </li>
               <li className="guidance__list">
-                <img className="guidance__list-img" src="/src/assets/icon_restart_pc.png" alt="" width="54" height="56"/>
+                <img className="guidance__list-img" src={iconRestartPcImg} alt="" width="54" height="56"/>
+
                 <span className="guidance__list-text">ボタンで音声を再開します。</span>
               </li>
             </ul>
