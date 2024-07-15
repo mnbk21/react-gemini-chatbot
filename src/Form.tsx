@@ -1,7 +1,7 @@
-import iconPlayPcImg from "./assets/icon_play_pc.png";
-import iconStopPcImg from "./assets/icon_stop_pc.png";
-import iconRestartPcImg from "./assets/icon_restart_pc.png";
-import iconSendPcImg from "./assets/icon_send_pc.png";
+import iconPlayImg from "./assets/icon_play.png";
+import iconStopImg from "./assets/icon_stop.png";
+import iconRestartImg from "./assets/icon_restart.png";
+import iconSendImg from "./assets/icon_send.png";
 
 type FormProps = {
   inputText: string
@@ -72,14 +72,14 @@ const Form = (props: FormProps) => {
     <form className="form">
       <div className="form__btn-wrap">
         <div id="play-btn" onClick={ReadPlay} className="form__btn">
-          <img className="form__btn-img" src={iconPlayPcImg} alt="" width="54" height="56"/>
+          <img className="form__btn-img" src={iconPlayImg} alt="" width="54" height="56"/>
 
         </div>
         <div id="stop-btn" onClick={ReadStop} className="form__btn">
-          <img className="form__btn-img" src={iconStopPcImg} alt="" width="54" height="56"/>
+          <img className="form__btn-img" src={iconStopImg} alt="" width="54" height="56"/>
         </div>
         <div id="restart-btn" onClick={ReadRestart} className="form__btn">
-          <img className="form__btn-img" src={iconRestartPcImg} alt="" width="54" height="56"/>
+          <img className="form__btn-img" src={iconRestartImg} alt="" width="54" height="56"/>
         </div>
       </div>
       <input
@@ -90,7 +90,7 @@ const Form = (props: FormProps) => {
         onChange={(e) => props.setInputText(e.target.value)}
       />
       <button className="form__submit" onClick={props.sendMessage}>
-        <img className="form__btn-img" src={iconSendPcImg} alt="" width="30" height="30"/>
+        <img className="form__btn-img" src={iconSendImg} alt="" width="30" height="30"/>
       </button>
 
     </form>
