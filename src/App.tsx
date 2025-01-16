@@ -67,6 +67,7 @@ function App() {
           <div id="greet" className="greet">
             <p id="greet__text" className="greet__text">初めまして！<br/>お話ししたい事を何でも入力して下さい。</p>
           </div>
+
           <div id="guidance" className="guidance">
             <ul className="guidance__list-wrap">
               <li className="guidance__list">
